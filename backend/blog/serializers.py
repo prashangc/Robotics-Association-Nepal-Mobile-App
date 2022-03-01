@@ -5,17 +5,18 @@ from rest_framework.authtoken.models import Token
 
 User = get_user_model()
 
-#Screen Titles
-class TitlesSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = ScreenTitle
-        fields = ['id', 'title']
 
 #Services Titles
 class ServicesTitlesSerializers(serializers.ModelSerializer):
     class Meta:
         model = ServicesTitle
-        fields = ['id', 'title']
+        fields = ['id', 'title', 'icons']
+
+#Project Titles
+class ProjectTitlesSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Project
+        fields = ['id', 'title', 'project_icons']
 
 
 #Image Slider
@@ -24,12 +25,32 @@ class ImageSliderSerializers(serializers.ModelSerializer):
         model = ImageSlider
         fields = "__all__"
 
+#Program Details
+class ProgramDetailsSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Program
+        fields = "__all__"
+
 
 #Stats Details
 class StatsDetailsSerializers(serializers.ModelSerializer):
     class Meta:
         model = StatsDetail
         fields = "__all__"
+
+#Year Category
+class YearSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Year
+        fields = ['id', 'title']
+
+
+#Members Category
+class MembersSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Member
+        fields = ['id', 'name', 'picture', 'position']
+
 
 
 

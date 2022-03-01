@@ -4,26 +4,43 @@ from rest_framework import viewsets
 from .serializers import *
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication 
-from .models import ScreenTitle, ImageSlider, ServicesTitle, StatsDetail
+from .models import ImageSlider, ServicesTitle, StatsDetail, Program, Year, Member
 # from rest_framework.generics import ListAPIView
 
 # Create your views here.
 
 
-# For Screen Titles
-class TitlesList(viewsets.ModelViewSet):
-    queryset = ScreenTitle.objects.all() 
-    serializer_class = TitlesSerializers
+
+# For Services Titles
+class YearList(viewsets.ModelViewSet):
+    queryset = Year.objects.all() 
+    serializer_class = YearSerializers
 
 # For Services Titles
 class ServicesTitlesList(viewsets.ModelViewSet):
     queryset = ServicesTitle.objects.all() 
     serializer_class = ServicesTitlesSerializers
 
+# For Project Titles
+class ProjectsTitlesList(viewsets.ModelViewSet):
+    queryset = Project.objects.all() 
+    serializer_class = ProjectTitlesSerializers
+
+# For Program Titles
+class ProgramsTitlesList(viewsets.ModelViewSet):
+    queryset = Program.objects.all() 
+    serializer_class = ProgramDetailsSerializers
+
 # For Stats Titles
 class StatsList(viewsets.ModelViewSet):
     queryset = StatsDetail.objects.all() 
     serializer_class = StatsDetailsSerializers
+
+
+# For Members Titles
+class MembersList(viewsets.ModelViewSet):
+    queryset = Member.objects.all() 
+    serializer_class = MembersSerializers
 
 
 class ImageSliderList(viewsets.ModelViewSet):    

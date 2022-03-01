@@ -1,18 +1,22 @@
 import 'dart:convert';
 
+import 'package:app/model/ProgramModel.dart';
 import 'package:app/model/imageSliderModel.dart';
-import 'package:app/model/screenTitle_model.dart';
-import 'package:app/model/statsDetailsModel.dart';
+import 'package:app/model/ServicesModel.dart';
+import 'package:app/model/StatsModel.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:localstorage/localstorage.dart';
 
+import '../model/ProjectsModel.dart';
+
 class DetailsState with ChangeNotifier {
   LocalStorage storage = LocalStorage("usertoken");
-  List<ScreenTitle>? _screenTitle;
+  late List<ServicesModel> _services;
+  late List<ProjectsModel> _projects;
+  late List<ProgramsModel> _programs;
   List<ImageSliderModel>? _imageSlider;
-  List? _serviceTitle;
-  List<StatsDetailsModel>? _statsDetails;
+  List<StatsModel>? _statsDetails;
 
   List? data;
   List imagesUrl = [];
@@ -47,24 +51,6 @@ class DetailsState with ChangeNotifier {
   //   }
   // }
 
-  Future<void> getScreenTitleData() async {
-    try {
-      String url = 'http://10.0.2.2:8000/api/titles/';
-      http.Response response = await http.get(Uri.parse(url));
-      var data = json.decode(response.body) as List;
-      List<ScreenTitle> temp = [];
-      for (var element in data) {
-        ScreenTitle screenTitle = ScreenTitle.fromJson(element);
-        temp.add(screenTitle);
-      }
-      _screenTitle = temp;
-      notifyListeners();
-    } catch (e) {
-      print("error getSreenTitleData");
-      print(e);
-    }
-  }
-
   Future<List> getAllScreenTitles() async {
     try {
       String url = 'http://10.0.2.2:8000/api/titles/';
@@ -79,31 +65,95 @@ class DetailsState with ChangeNotifier {
     }
   }
 
-  Future<List> getAllServiceTitles() async {
+  Future<bool> getAllServiceTitles() async {
     try {
       String url = 'http://10.0.2.2:8000/api/services/';
-      var response = await http.get(Uri.parse(url));
-      if (response.statusCode == 200) {
-        return jsonDecode(response.body);
-      } else {
-        return Future.error('Server error');
+      var response = await http.get(
+        Uri.parse(url),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      );
+      var data = json.decode(response.body) as List;
+      List<ServicesModel> temp = [];
+      for (var element in data) {
+        ServicesModel services = ServicesModel.fromJson(element);
+        temp.add(services);
       }
+      _services = temp;
+      notifyListeners();
+      return true;
     } catch (e) {
-      return Future.error(e);
+      return false;
     }
   }
 
-  Future<List> getAllStatsDetails() async {
+  Future<bool> getAllProjectTitles() async {
+    try {
+      String url = 'http://10.0.2.2:8000/api/projects/';
+      var response = await http.get(
+        Uri.parse(url),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      );
+      var data = json.decode(response.body) as List;
+      List<ProjectsModel> temp = [];
+      for (var element in data) {
+        ProjectsModel projects = ProjectsModel.fromJson(element);
+        temp.add(projects);
+      }
+      _projects = temp;
+      notifyListeners();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> getAllProgramsTitles() async {
+    try {
+      String url = 'http://10.0.2.2:8000/api/programs/';
+      var response = await http.get(
+        Uri.parse(url),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      );
+      var data = json.decode(response.body) as List;
+      List<ProgramsModel> temp = [];
+      for (var element in data) {
+        ProgramsModel programs = ProgramsModel.fromJson(element);
+        temp.add(programs);
+      }
+      _programs = temp;
+      notifyListeners();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> getAllStatsDetails() async {
     try {
       String url = 'http://10.0.2.2:8000/api/stats/';
-      var response = await http.get(Uri.parse(url));
-      if (response.statusCode == 200) {
-        return jsonDecode(response.body);
-      } else {
-        return Future.error('Server error');
+      var response = await http.get(
+        Uri.parse(url),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      );
+      var data = json.decode(response.body) as List;
+      List<StatsModel> temp = [];
+      for (var element in data) {
+        StatsModel stats = StatsModel.fromJson(element);
+        temp.add(stats);
       }
+      _statsDetails = temp;
+      notifyListeners();
+      return true;
     } catch (e) {
-      return Future.error(e);
+      return false;
     }
   }
 
@@ -160,19 +210,23 @@ class DetailsState with ChangeNotifier {
     }
   }
 
-  List<ScreenTitle>? get screenTitle {
-    return [...?_screenTitle];
-  }
-
   List<ImageSliderModel>? get imageSlider {
     return [...?_imageSlider];
   }
 
-  List? get serviceTitle {
-    return [...?_serviceTitle];
+  List<ServicesModel>? get serviceTitle {
+    return [..._services];
   }
 
-  List<StatsDetailsModel>? get statsDetails {
+  List<ProjectsModel>? get projectTitle {
+    return [..._projects];
+  }
+
+  List<ProgramsModel>? get programTitle {
+    return [..._programs];
+  }
+
+  List<StatsModel>? get statsDetails {
     return [...?_statsDetails];
   }
 }
