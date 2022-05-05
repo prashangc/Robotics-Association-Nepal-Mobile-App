@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class ImageSlider(models.Model):
-    pictures = models.ImageField(upload_to="my_picture",blank=True)
+    pictures = models.ImageField(upload_to="image_slider",blank=True)
 
 class ServicesTitle(models.Model):
     title = models.CharField(max_length=100)
@@ -32,13 +32,22 @@ class StatsDetail(models.Model):
         return self.stats_name 
 
 class Year(models.Model):
-    year_title = models.CharField(max_length=150)
+    year = models.CharField(max_length=150)
     def __str__(self):
-        return self.year_title
+
+        return self.year
+        # return f"Year = {self.year_title} and Member Category = {self.member_category}"
+
+class MemberCategory(models.Model):
+    category = models.CharField(max_length=150)  
+    def __str__(self):
+        return self.category
+
 
 
 class Member(models.Model):
-    year = models.ForeignKey(Year,models.CASCADE)
+    year_category = models.ForeignKey(Year,models.CASCADE)
+    member_category = models.ForeignKey(MemberCategory,models.CASCADE)
     name = models.CharField(max_length=150)
     picture = models.ImageField(upload_to="members_images",blank=True)
     position = models.CharField(max_length=150)

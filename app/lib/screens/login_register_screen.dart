@@ -37,7 +37,7 @@ class LoginRegisterScreen extends StatelessWidget {
                       child: Text(
                         'LOGIN',
                         style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 20,
                           color: Colors.black,
                         ),
                       ),
@@ -46,7 +46,7 @@ class LoginRegisterScreen extends StatelessWidget {
                       child: Text(
                         'REGISTER',
                         style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 20,
                           color: Colors.black,
                         ),
                       ),

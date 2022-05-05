@@ -42,14 +42,19 @@ class StatsDetailsSerializers(serializers.ModelSerializer):
 class YearSerializers(serializers.ModelSerializer):
     class Meta:
         model = Year
-        fields = ['id', 'title']
+        fields = ['id', 'year']
 
+
+class MemberCategorySerializers(serializers.ModelSerializer):
+    class Meta:
+        model = MemberCategory
+        fields = ['id', 'category']
 
 #Members Category
 class MembersSerializers(serializers.ModelSerializer):
     class Meta:
         model = Member
-        fields = ['id', 'name', 'picture', 'position']
+        fields = ['id', 'year_category', 'member_category', 'name', 'picture', 'position']
 
 
 

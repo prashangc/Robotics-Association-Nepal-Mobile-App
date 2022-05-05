@@ -1,4 +1,4 @@
-import '../model/profileImageModel.dart';
+import '../model/ProfileImageModel.dart';
 
 class ProfilePreference {
   static const myUser = ProfileImageModel(

@@ -7,6 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../appbarScreeen/AllProgramsList.dart';
+import '../appbarScreeen/AllProjectsList.dart';
+import '../appbarScreeen/AllServicesList.dart';
 import '../widgets/Programs.dart';
 import '../widgets/Services.dart';
 import '../widgets/Stats.dart';
@@ -21,7 +24,7 @@ class HomeBottomNavigation extends StatefulWidget {
 class _HomeBottomNavigationState extends State<HomeBottomNavigation> {
   bool _init = true;
   bool _isLoading = false;
-
+  var size, height, width;
   @override
   void didChangeDependencies() async {
     if (_init) {
@@ -45,23 +48,27 @@ class _HomeBottomNavigationState extends State<HomeBottomNavigation> {
   late List data;
   @override
   Widget build(BuildContext context) {
+    size = MediaQuery.of(context).size;
+    height = size.height;
+    width = size.width;
     final servicesLists = Provider.of<DetailsState>(context).serviceTitle;
     final projectsLists = Provider.of<DetailsState>(context).projectTitle;
     final programsLists = Provider.of<DetailsState>(context).programTitle;
     final statsLists = Provider.of<DetailsState>(context).statsDetails;
 
-    if (_isLoading == false ||
-        servicesLists == null ||
-        projectsLists == null ||
-        programsLists == null ||
-        statsLists == null) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
-    }
+    // if (_isLoading == false) {
+    //   return const Scaffold(
+    //     body: Center(child: CircularProgressIndicator()),
+    //   );
+    // }
     return Scaffold(
       endDrawer: AppDrawer(),
       appBar: AppBar(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(15),
+          ),
+        ),
         actions: [
           Builder(
             builder: (context) => IconButton(
@@ -109,7 +116,7 @@ class _HomeBottomNavigationState extends State<HomeBottomNavigation> {
                   future: imageAPIData.getImageSliderData(),
                   builder: (context, snapshot) {
                     // print(snapshot.data);
-                    var actualImages = snapshot.data!;
+                    var actualImages = snapshot.data;
                     if (snapshot.hasData) {
                       return Stack(
                         children: [
@@ -129,7 +136,7 @@ class _HomeBottomNavigationState extends State<HomeBottomNavigation> {
                                     activeIndex = index;
                                   });
                                 }),
-                            itemCount: actualImages.length,
+                            itemCount: actualImages!.length,
                             itemBuilder: (context, index, realIndex) {
                               return Container(
                                 decoration: BoxDecoration(
@@ -179,8 +186,10 @@ class _HomeBottomNavigationState extends State<HomeBottomNavigation> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0),
                   child: Container(
-                    width: double.infinity,
-                    height: 160.0,
+                    width: width,
+
+                    // height: 160.0,
+                    height: height * 0.28,
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(
@@ -197,7 +206,7 @@ class _HomeBottomNavigationState extends State<HomeBottomNavigation> {
                       children: [
                         Padding(
                           padding:
-                              const EdgeInsets.fromLTRB(25.0, 5.0, 25.0, 0.0),
+                              const EdgeInsets.fromLTRB(25.0, 5.0, 25.0, 5.0),
                           child: Text(
                             'Top Services',
                             style: GoogleFonts.poppins(
@@ -216,12 +225,42 @@ class _HomeBottomNavigationState extends State<HomeBottomNavigation> {
                                 const EdgeInsets.fromLTRB(15.0, 8.0, 15.0, 0.0),
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: servicesLists.length,
+                                itemCount: servicesLists!.length,
                                 itemBuilder: (ctx, i) {
+                                  if (servicesLists == null) {
+                                    const Text("Services data not found");
+                                  }
                                   return Services(servicesLists[i]);
                                 }),
                           ),
                         ),
+                        Center(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.black,
+                              padding: const EdgeInsets.all(8.0),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5)),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const AllServicesList()),
+                              );
+                            },
+                            child: const Text(
+                              'View more',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        )
                       ],
                     ),
                   ),
@@ -230,7 +269,8 @@ class _HomeBottomNavigationState extends State<HomeBottomNavigation> {
                   padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0),
                   child: Container(
                     width: double.infinity,
-                    height: 160.0,
+                    // height: 160.0,
+                    height: height * 0.28,
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(
@@ -266,12 +306,42 @@ class _HomeBottomNavigationState extends State<HomeBottomNavigation> {
                                 const EdgeInsets.fromLTRB(15.0, 8.0, 15.0, 0.0),
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: projectsLists.length,
+                                itemCount: projectsLists!.length,
                                 itemBuilder: (ctx, i) {
+                                  if (projectsLists.isEmpty) {
+                                    const Text("Projects data not found");
+                                  }
                                   return Projects(projectsLists[i]);
                                 }),
                           ),
                         ),
+                        Center(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.black,
+                              padding: const EdgeInsets.all(8.0),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5)),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const AllProjectsList()),
+                              );
+                            },
+                            child: const Text(
+                              'View more',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        )
                       ],
                     ),
                   ),
@@ -280,7 +350,8 @@ class _HomeBottomNavigationState extends State<HomeBottomNavigation> {
                   padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0),
                   child: Container(
                     width: double.infinity,
-                    height: 160.0,
+                    // height: 160.0,
+                    height: height * 0.28,
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(
@@ -316,12 +387,42 @@ class _HomeBottomNavigationState extends State<HomeBottomNavigation> {
                                 const EdgeInsets.fromLTRB(15.0, 8.0, 15.0, 0.0),
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: programsLists.length,
+                                itemCount: programsLists!.length,
                                 itemBuilder: (ctx, i) {
+                                  if (programsLists.isEmpty) {
+                                    const Text("programsLists data not found");
+                                  }
                                   return Programs(programsLists[i]);
                                 }),
                           ),
                         ),
+                        Center(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.black,
+                              padding: const EdgeInsets.all(8.0),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5)),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const AllProgramsList()),
+                              );
+                            },
+                            child: const Text(
+                              'View more',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        )
                       ],
                     ),
                   ),
@@ -329,8 +430,8 @@ class _HomeBottomNavigationState extends State<HomeBottomNavigation> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0),
                   child: Container(
-                    width: double.infinity,
-                    height: 500.0,
+                    width: width,
+                    height: height,
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(
@@ -367,8 +468,11 @@ class _HomeBottomNavigationState extends State<HomeBottomNavigation> {
                             child: ListView.builder(
                                 physics: const NeverScrollableScrollPhysics(),
                                 // scrollDirection: Axis.horizontal,
-                                itemCount: statsLists.length,
+                                itemCount: statsLists!.length,
                                 itemBuilder: (ctx, i) {
+                                  if (statsLists.isEmpty) {
+                                    const Text("no stats data");
+                                  }
                                   return Stats(statsLists[i]);
                                 }),
                           ),

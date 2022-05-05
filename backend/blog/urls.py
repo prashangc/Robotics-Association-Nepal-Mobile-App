@@ -12,6 +12,7 @@ route.register('stats', StatsList)
 route.register('projects', ProjectsTitlesList)
 route.register('programs', ProgramsTitlesList)
 route.register('year', YearList)
+route.register('member/category', MemberCategoryList)
 route.register('members', MembersList)
 
 

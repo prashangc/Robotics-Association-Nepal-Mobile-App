@@ -4,7 +4,7 @@ from rest_framework import viewsets
 from .serializers import *
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication 
-from .models import ImageSlider, ServicesTitle, StatsDetail, Program, Year, Member
+from .models import ImageSlider, ServicesTitle, StatsDetail, Program, Year, MemberCategory, Member
 # from rest_framework.generics import ListAPIView
 
 # Create your views here.
@@ -15,6 +15,10 @@ from .models import ImageSlider, ServicesTitle, StatsDetail, Program, Year, Memb
 class YearList(viewsets.ModelViewSet):
     queryset = Year.objects.all() 
     serializer_class = YearSerializers
+
+class MemberCategoryList(viewsets.ModelViewSet):
+    queryset = MemberCategory.objects.all() 
+    serializer_class = MemberCategorySerializers
 
 # For Services Titles
 class ServicesTitlesList(viewsets.ModelViewSet):
@@ -41,6 +45,7 @@ class StatsList(viewsets.ModelViewSet):
 class MembersList(viewsets.ModelViewSet):
     queryset = Member.objects.all() 
     serializer_class = MembersSerializers
+
 
 
 class ImageSliderList(viewsets.ModelViewSet):    

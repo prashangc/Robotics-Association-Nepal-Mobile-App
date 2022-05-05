@@ -1,0 +1,35 @@
+As a user, I want to view the projects and different initiatives carried out by RAN so that I can have information about RAN's projects.
+
+Need to design the UI with card view/list view of the projects and initiations of the RAN.
+
+List of Projects
+
+Forex Board
+Weather Station
+Community library projects
+Data monitoring system
+Flood Early Warning System
+Light of Hope
+CNC Plasma Cutter
+Automated Wheel Chair
+KrishakCopter
+Fixed wings Aircraft
+Connecting Space to Village
+Automatic Water Pumping System
+Dairy maker Code + Design Challenge
+Mission Oxygen Team
+Sister Robot
+De-Husking Robot
+National Innovation Digital Network
+Tech for Differently Abled Person(Tech4DAP) and many more
+
+Details of every project and its associated images will be provided to you ASAP. If there is not any photo, please use the relevant placeholder for the project cover image. 
+
+ACCEPTANCE CRITERIA
+
+A user can view the Project’s Title, Cover image, description in a grid/list card view.
+A user can switch between grid view and list view for cards.
+A user can select a particular card to have detailed information about the projects.
+Detailed information must include title, cover image, description, external link, a person of contact (for more information), technical specifications, white papers (if applicable).
+If the user clicked the external link, redirect it to the respective link inside the app.
+PS. If a user tries to have the information regarding projects from the home activity then show the project detailed fragment.

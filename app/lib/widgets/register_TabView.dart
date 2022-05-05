@@ -1,6 +1,5 @@
 import 'package:app/screens/login_register_screen.dart';
 import 'package:app/state/details_state.dart';
-import 'package:app/widgets/login_tabView.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

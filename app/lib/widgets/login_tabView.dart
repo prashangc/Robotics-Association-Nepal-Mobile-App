@@ -152,7 +152,12 @@ class _LoginTabViewState extends State<LoginTabView> {
                           borderRadius: BorderRadius.circular(12)),
                     ),
                     onPressed: () {
-                      _loginNow();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomeScreen()),
+                      );
+                      // _loginNow();
                     },
                     child: const Text(
                       'LOGIN',

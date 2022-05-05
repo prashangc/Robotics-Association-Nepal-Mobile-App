@@ -1,21 +1,44 @@
 class ProgramsModel {
-  int? id;
-  String? title;
-  String? programIcons;
+  int? programID;
+  String? programName;
+  String? objectives;
+  String? startDate;
+  String? endDate;
+  String? programCoverImage;
+  String? programType;
+  String? programIcon;
 
-  ProgramsModel({this.id, this.title, this.programIcons});
+  ProgramsModel(
+      {this.programID,
+      this.programName,
+      this.objectives,
+      this.startDate,
+      this.endDate,
+      this.programCoverImage,
+      this.programType,
+      this.programIcon});
 
   ProgramsModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    title = json['title'];
-    programIcons = json['program_icons'];
+    programID = json['ProgramID'];
+    programName = json['ProgramName'];
+    objectives = json['Objectives'];
+    startDate = json['StartDate'];
+    endDate = json['EndDate'];
+    programCoverImage = json['ProgramCoverImage'];
+    programType = json['ProgramType'];
+    programIcon = json['ProgramIcon'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = id;
-    data['title'] = title;
-    data['program_icons'] = programIcons;
+    data['ProgramID'] = programID;
+    data['ProgramName'] = programName;
+    data['Objectives'] = objectives;
+    data['StartDate'] = startDate;
+    data['EndDate'] = endDate;
+    data['ProgramCoverImage'] = programCoverImage;
+    data['ProgramType'] = programType;
+    data['ProgramIcon'] = programIcon;
     return data;
   }
 }

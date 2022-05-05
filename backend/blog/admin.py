@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ImageSlider, ServicesTitle, StatsDetail, Project, Program, Year, Member
+from .models import ImageSlider, ServicesTitle, StatsDetail, Project, Program, MemberCategory, Year, Member
 
 # Register your models here.
 
@@ -24,7 +24,11 @@ class ProgramsAdmin(admin.ModelAdmin):
 
 
 class YearAdmin(admin.ModelAdmin):
-    list = ['id', 'title'] 
+    list = ['id', 'year'] 
+
+
+class MemberCategoryAdmin(admin.ModelAdmin):
+    list = ['id', 'category']     
 
 class MemberAdmin(admin.ModelAdmin):
     list = ['id', 'name', 'position', 'picture']     
@@ -35,6 +39,7 @@ admin.site.register(StatsDetail, StatsAdmin)
 admin.site.register(Project, ProjectTitleAdmin)
 admin.site.register(Program, ProgramsAdmin)
 admin.site.register(Year, YearAdmin)
+admin.site.register(MemberCategory, MemberCategoryAdmin)
 admin.site.register(Member, MemberAdmin)
 
 

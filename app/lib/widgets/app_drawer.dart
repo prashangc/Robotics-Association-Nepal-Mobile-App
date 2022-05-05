@@ -1,8 +1,16 @@
+import 'package:app/appbarScreeen/AllProgramsList.dart';
+import 'package:app/appbarScreeen/AllProjectsList.dart';
+import 'package:app/appbarScreeen/Collaborators.dart';
+import 'package:app/appbarScreeen/Gallery.dart';
+import 'package:app/bottomNavigationPages/HomeBottomNavigation.dart';
+import 'package:app/bottomNavigationPages/RanMembersBottomNavigation.dart';
 import 'package:app/screens/login_register_screen.dart';
-import 'package:app/utils/profilePreferences.dart';
-import 'package:app/widgets/profileWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:localstorage/localstorage.dart';
+
+import '../appbarScreeen/AboutUs.dart';
+import '../appbarScreeen/AllServicesList.dart';
 
 class AppDrawer extends StatefulWidget {
   @override
@@ -18,7 +26,6 @@ class _AppDrawerState extends State<AppDrawer> {
       Navigator.of(context).pushReplacementNamed(LoginRegisterScreen.routeName);
     }
 
-    const user = ProfilePreference.myUser;
     return SafeArea(
       child: Container(
         color: Colors.white,
@@ -28,134 +35,114 @@ class _AppDrawerState extends State<AppDrawer> {
           const SizedBox(
             height: 10.0,
           ),
-          Image.asset('assets/logo.png'),
-          const SizedBox(
-            height: 30.0,
-          ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(15.0, 0.0, 45.0, 10.0),
-            child: Row(
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: 100.0,
-                  height: 100.0,
-                  child: ListView(
-                    physics: const BouncingScrollPhysics(),
-                    children: [
-                      ProfileWidget(
-                        imagePath: user.imagePath,
-                        onClicked: () async {},
-                      ),
-                    ],
-                  ),
-                ),
-                // CircleAvatar(
-                //   child: Image.asset('assets/user.png'),
-                //   radius: 40.0,
-                //   backgroundColor: Colors.transparent,
-                // ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      'USERNAME',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'POSITION',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset('assets/logo.png'),
           ),
           ListTile(
-            onTap: () {},
-            leading: const Icon(
-              Icons.home,
-              size: 28.0,
-              color: Colors.black,
-            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const HomeBottomNavigation()),
+              );
+            },
+            leading: SvgPicture.asset('assets/home.svg'),
             title: const Text(
               "Home",
               style: TextStyle(fontSize: 20.0),
             ),
           ),
           ListTile(
-            onTap: () {},
-            leading: const Icon(
-              Icons.work,
-              size: 28.0,
-              color: Colors.black,
-            ),
-            title: const Text(
-              "Projects",
-              style: TextStyle(fontSize: 20.0),
-            ),
-          ),
-          ListTile(
-            onTap: () {},
-            leading: const Icon(
-              Icons.design_services,
-              size: 28.0,
-              color: Colors.black,
-            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const AllServicesList()),
+              );
+            },
+            leading: SvgPicture.asset('assets/home.svg'),
             title: const Text(
               "Services",
               style: TextStyle(fontSize: 20.0),
             ),
           ),
           ListTile(
-            onTap: () {},
-            leading: const Icon(
-              Icons.image,
-              size: 28.0,
-              color: Colors.black,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const AllProgramsList()),
+              );
+            },
+            leading: SvgPicture.asset('assets/home.svg'),
+            title: const Text(
+              "Programs",
+              style: TextStyle(fontSize: 20.0),
             ),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const AllProjectsList()),
+              );
+            },
+            leading: SvgPicture.asset('assets/home.svg'),
+            title: const Text(
+              "Projects",
+              style: TextStyle(fontSize: 20.0),
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Gallery()),
+              );
+            },
+            leading: SvgPicture.asset('assets/home.svg'),
             title: const Text(
               "Gallery",
               style: TextStyle(fontSize: 20.0),
             ),
           ),
           ListTile(
-            onTap: () {},
-            leading: const Icon(
-              Icons.people,
-              size: 28.0,
-              color: Colors.black,
-            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const RanMembersBottomNavigation()),
+              );
+            },
+            leading: SvgPicture.asset('assets/home.svg'),
             title: const Text(
               "RAN Family",
               style: TextStyle(fontSize: 20.0),
             ),
           ),
           ListTile(
-            onTap: () {},
-            leading: const Icon(
-              Icons.verified_user_sharp,
-              size: 28.0,
-              color: Colors.black,
-            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Collaborators()),
+              );
+            },
+            leading: SvgPicture.asset('assets/home.svg'),
             title: const Text(
               "Collaborators",
               style: TextStyle(fontSize: 20.0),
             ),
           ),
           ListTile(
-            onTap: () {},
-            leading: const Icon(
-              Icons.message,
-              size: 28.0,
-              color: Colors.black,
-            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AboutUs()),
+              );
+            },
+            leading: SvgPicture.asset('assets/home.svg'),
             title: const Text(
               "About Us",
               style: TextStyle(fontSize: 20.0),
@@ -164,11 +151,7 @@ class _AppDrawerState extends State<AppDrawer> {
           const Spacer(),
           ListTile(
             onTap: () {},
-            leading: const Icon(
-              Icons.settings,
-              size: 28.0,
-              color: Colors.black,
-            ),
+            leading: SvgPicture.asset('assets/home.svg'),
             title: const Text(
               "Settings",
               style: TextStyle(fontSize: 20.0),

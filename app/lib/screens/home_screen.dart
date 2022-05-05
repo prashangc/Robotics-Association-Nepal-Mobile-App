@@ -2,10 +2,10 @@ import 'package:app/bottomNavigationPages/BlogFeedsBottomNavigation.dart';
 import 'package:app/bottomNavigationPages/HomeBottomNavigation.dart';
 import 'package:app/bottomNavigationPages/NotificationsBottomNavigation.dart';
 import 'package:app/bottomNavigationPages/ProgramsBottomNavigation.dart';
-import 'package:app/bottomNavigationPages/ServicesBottomNavigation.dart';
+import 'package:app/bottomNavigationPages/RanMembersBottomNavigation.dart';
 import 'package:app/state/details_state.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = "/home-screen";
@@ -19,8 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   final screens = [
     const HomeBottomNavigation(),
+    const RanMembersBottomNavigation(),
     const ProgramsBottomNavigation(),
-    const ServicesBottomNavigation(),
     const BlogFeedBottomNavigation(),
     const NotificationsBottomNavigation(),
   ];
@@ -48,28 +48,30 @@ class _HomeScreenState extends State<HomeScreen> {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         iconSize: 35.0,
-        items: const [
+        items: [
           BottomNavigationBarItem(
             label: 'Home',
-            icon: Icon(FontAwesomeIcons.home),
+            icon: SvgPicture.asset('assets/home.svg'),
           ),
           BottomNavigationBarItem(
-            label: 'Programs',
-            icon: Icon(FontAwesomeIcons.th),
+            label: 'Gallery',
+            icon: SvgPicture.asset('assets/gallery.svg'),
           ),
           BottomNavigationBarItem(
-            label: 'Services',
-            icon: Icon(FontAwesomeIcons.servicestack),
+            label: 'Blog',
+            icon: SvgPicture.asset('assets/blog.svg'),
           ),
           BottomNavigationBarItem(
-            label: 'Blog-Feeds',
-            icon: Icon(FontAwesomeIcons.fileAlt),
-            backgroundColor: Colors.green,
+            label: 'Projects',
+            icon: SvgPicture.asset('assets/projects.svg'),
           ),
-          BottomNavigationBarItem(
-            label: 'Notifications',
-            icon: Icon(FontAwesomeIcons.bell),
-          )
+          const BottomNavigationBarItem(
+            label: 'Menu',
+            icon: Icon(
+              Icons.menu,
+              size: 28.0,
+            ),
+          ),
         ],
       ),
     );
